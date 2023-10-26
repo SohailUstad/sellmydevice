@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobiles</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here if needed */
+        .mobile-card {
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+        .mobile-card img {
+            max-width: 100%; /* Ensure the image is responsive */
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mobiles</h1>
+        <div class="row" id="mobiles-data">
+            <!-- Data will be displayed here -->
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios for making Ajax requests -->
+    <script>
+        // Use jQuery and Axios to fetch and display data
+        $(document).ready(function () {
+            axios.get('http://localhost:8080/sellmydevice.in/mobiles')
+                .then(function (response) {
+                    const mobiles = response.data;
+                    const mobilesData = document.getElementById('mobiles-data');
+
+                    mobiles.forEach(function (mobile) {
+                        const card = document.createElement('div');
+                        card.className = 'col-md-3 mobile-card'; // Use Bootstrap classes for responsiveness
+                        card.innerHTML = `
+                            <div class="card">
+                                <img src="${mobile.image}" class="card-img-top" alt="Mobile Image">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">${mobile.model}</h5>
+                                    <p class="card-text text-center">${mobile.brand}</p>
+                                   
+                                </div>
+                            </div>
+                        `;
+                        mobilesData.appendChild(card);
+                    });
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        });
+    </script>
+</body>
+</html>

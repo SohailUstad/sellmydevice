@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Mobiles | Admin Panel</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here if needed */
+        .registration-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="registration-form">
+                    <h2 class="text-center mb-4">Add Mobiles</h2>
+                    <div id="errorContainer" class="alert alert-danger mt-3" style="display: none;"></div>
+                    <form id="registrationForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Model" id="model" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Brand" id="brand" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Excellent Price" id="ep" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Very Good Price" id="vgp" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Good Price" id="gp" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Fair Price" id="fp" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">Select Photo:</label>
+                            <input type="file" class="form-control-file" id="photo" name="photo" accept="image/*"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap and jQuery scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#registrationForm").submit(function (event) {
+                event.preventDefault();
+
+                var mobileData = {
+                    model: $("#model").val(),
+                    brand: $("#brand").val(),
+                    maxprice: $("#ep").val(),
+                    verygoodprice: $("#vgp").val(),
+                    goodprice: $("#gp").val(),
+                    fairprice: $("#fp").val()
+                };
+
+                var imageFile = $("#photo")[0].files[0];
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    var imageBase64 = reader.result.split(",")[1]; // Extract base64 data
+
+                    var requestData = {
+                        mobile: mobileData,
+                        image: imageBase64
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8080/sellmydevice.in/mobiles",
+                        data: JSON.stringify(requestData),
+                        contentType: "application/json",
+                        success: function (response) {
+                            console.log(response);
+                            window.location.href = "allmobiles.htm";
+                        },
+                        error: function (error) {
+                            console.error(error);
+                            $("#errorContainer").text("Error: " + "Failed to register").show();
+                        }
+                    });
+                };
+
+                reader.readAsDataURL(imageFile);
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
