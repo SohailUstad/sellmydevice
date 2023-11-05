@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Form with AJAX</title>
+</head>
+<body>
+  <h2>Submit Form with AJAX</h2>
+  <form id="myForm">
+    <label for="phoneid">Phone ID:</label>
+    <input type="text" id="phoneid" name="phoneid" value="1"><br>
+
+    <label for="switchoff">Switch Off:</label>
+    <input type="text" id="switchoff" name="switchoff" value="no"><br>
+
+    <label for="box">Box:</label>
+    <input type="text" id="box" name="box" value="yes"><br>
+
+    <label for="charger">Charger:</label>
+    <input type="text" id="charger" name="charger" value="yes"><br>
+
+    <label for="headphone">Headphone:</label>
+    <input type="text" id="headphone" name="headphone" value="yes"><br>
+
+    <label for="validbill">Valid Bill:</label>
+    <input type="text" id="validbill" name="validbill" value="yes"><br>
+
+    <label for="months3">3 Months:</label>
+    <input type="text" id="months3" name="months3" value="no"><br>
+
+    <label for="months39">3-9 Months:</label>
+    <input type="text" id="months39" name="months39" value="no"><br>
+
+    <label for="months9">9 Months:</label>
+    <input type="text" id="months9" name="months9" value="yes"><br>
+
+    <label for="screen">Screen:</label>
+    <input type="text" id="screen" name="screen" value="no"><br>
+
+    <label for="camera">Camera:</label>
+    <input type="text" id="camera" name="camera" value="no"><br>
+
+    <label for="speakers">Speakers:</label>
+    <input type="text" id="speakers" name="speakers" value="no"><br>
+
+    <label for="network">Network:</label>
+    <input type="text" id="network" name="network" value="no"><br>
+
+    <label for="battery">Battery:</label>
+    <input type="text" id="battery" name="battery" value="yes"><br>
+
+    <label for="powerbutton">Power Button:</label>
+    <input type="text" id="powerbutton" name="powerbutton" value="no"><br>
+
+    <label for="volumbutton">Volume Button:</label>
+    <input type="text" id="volumbutton" name="volumbutton" value="no"><br>
+
+    <label for="chargingport">Charging Port:</label>
+    <input type="text" id="chargingport" name="chargingport" value="yes"><br>
+
+    <label for="glasscrack">Glass Crack:</label>
+    <input type="text" id="glasscrack" name="glasscrack" value="yes"><br>
+
+    <label for="excellent">Excellent:</label>
+    <input type="text" id="excellent" name="excellent" value="yes"><br>
+
+    <label for="verygood">Very Good:</label>
+    <input type="text" id="verygood" name="verygood" value="yes"><br>
+
+    <label for="good">Good:</label>
+    <input type="text" id="good" name="good" value="no"><br>
+
+    <label for="fair">Fair:</label>
+    <input type="text" id="fair" name="fair" value="no"><br>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+
+  <div id="response"></div>
+
+  <script>
+    function submitForm() {
+      const formData = {
+        phoneid: document.getElementById('phoneid').value,
+        switchoff: document.getElementById('switchoff').value,
+        box: document.getElementById('box').value,
+        charger: document.getElementById('charger').value,
+        headphone: document.getElementById('headphone').value,
+        validbill: document.getElementById('validbill').value,
+        months3: document.getElementById('months3').value,
+        months39: document.getElementById('months39').value,
+        months9: document.getElementById('months9').value,
+        screen: document.getElementById('screen').value,
+        camera: document.getElementById('camera').value,
+        speakers: document.getElementById('speakers').value,
+        network: document.getElementById('network').value,
+        battery: document.getElementById('battery').value,
+        powerbutton: document.getElementById('powerbutton').value,
+        volumbutton: document.getElementById('volumbutton').value,
+        chargingport: document.getElementById('chargingport').value,
+        glasscrack: document.getElementById('glasscrack').value,
+        excellent: document.getElementById('excellent').value,
+        verygood: document.getElementById('verygood').value,
+        good: document.getElementById('good').value,
+        fair: document.getElementById('fair').value,
+      };
+      const url = 'https://b888-124-66-172-172.ngrok-free.app/selltechie.in/quotes';
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById('response').innerHTML = JSON.stringify(data, null, 2);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>
