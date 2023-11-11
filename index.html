@@ -1,125 +1,482 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>SellTechi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+
 <body>
-  <h2>Get Quotes</h2>
-  <form id="myForm">
-    <label for="phoneid">Phone ID:</label>
-    <input type="text" id="phoneid" name="phoneid" value="1"><br>
+    <div>
+        <h1
+            style="color: navy;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+            Apple iPhone 5c 8 GB (Factory Unlocked)
+        </h1>
+        <div id="view">
 
-    <label for="switchoff">Switch Off:</label>
-    <input type="text" id="switchoff" name="switchoff" value="no"><br>
+        </div>
+    </div>
 
-    <label for="box">Box:</label>
-    <input type="text" id="box" name="box" value="yes"><br>
+    <script>
+        var switches = "no";
 
-    <label for="charger">Charger:</label>
-    <input type="text" id="charger" name="charger" value="yes"><br>
+        var box = "no";
+        var charger = "no";
+        var headphone = "no";
+        var validbill = "no";
 
-    <label for="headphone">Headphone:</label>
-    <input type="text" id="headphone" name="headphone" value="yes"><br>
+        var months3 = "no";
+        var months39 = "no";
+        var months9 = "no";
 
-    <label for="validbill">Valid Bill:</label>
-    <input type="text" id="validbill" name="validbill" value="yes"><br>
+        var screen = "no";
+        var camera = "no";
+        var speakers = "no";
+        var network = "no";
+        var battery = "no";
+        var powerbutton = "no";
+        var volumbutton = "no";
+        var chargingport = "no";
+        var glasscrack = "no";
 
-    <label for="months3">3 Months:</label>
-    <input type="text" id="months3" name="months3" value="no"><br>
+        var excellent = "no";
+        var verygood = "no";
+        var good = "no";
+        var fair = "no";
+        home = `<div id="switches" style="margin: 5px;padding: 5px;">
+    
+    <p
+        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
+        1. Switches On
+    </p>
+    <div style="padding: 20px;margin: 20px;text-align:center;">
+        <span onclick="choiceSwitchOnOrOff(1)" style="cursor: pointer;padding: 10px;margin: 10px;font-size: 30px;background-color: yellow;border-radius: 10px;border: 1px solid black;">YES</span>
+        <span onclick="choiceSwitchOnOrOff(0)" style="cursor: pointer;padding: 10px;margin: 10px;font-size: 30px;background-color: red;color: white;border-radius: 10px;border: 2px solid black;">NO</span>
+    </div>
+</div>`;
 
-    <label for="months39">3-9 Months:</label>
-    <input type="text" id="months39" name="months39" value="no"><br>
+        accessories = `
+        <div id="switches" style="margin: 5px;padding: 5px;">
+    <p
+        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
+        2. Accessories You Have
+    </p>
+    <div style="padding: 20px;margin: 20px;text-align:center;">
+        <div onclick="clickBox(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
+            <img style="height: 200px;width: 200px;" src="https://cdn.vectorstock.com/i/1000x1000/68/15/mobile-box-logo-icon-design-vector-22546815.webp"
+                alt="hello">
+        </div>
+        <div onclick="clickCharger(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
+            <img style="height: 200px;width: 200px;" src="https://m.media-amazon.com/images/I/61FY05f+D6L._SL1500_.jpg"
+                alt="hello">
+        </div>
+        <div onclick="clickHeadphone(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
+            <img style="height: 200px;width: 200px;" src="https://m.media-amazon.com/images/I/61s3IkXIZjL._SL1417_.jpg"
+                alt="hello">
+        </div>
+        <div onclick="clickValidbill(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
+            <img style="height: 200px;width: 200px;" src="https://cdn.printshoppy.com/image/cache/catalog/product-image/stationery/bill-book/bill-book-102-600x800.webp"
+                alt="hello">
+        </div>
+    </div>
+    <div style="text-align:left;"><span onclick="switchView(0)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
+    <div style="text-align:right;"><span onclick="switchView(2)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Next</span></div>
+</div>
+`;
 
-    <label for="months9">9 Months:</label>
-    <input type="text" id="months9" name="months9" value="yes"><br>
+        age = `<div id="switches" style="margin: 5px;padding: 5px;">
+    <p
+        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
+        3. How old your phone is?
+    </p>
+    <div style="padding: 20px;margin: 20px;text-align:center;">
+        <div id="months3" onclick="selectAge(this,3)" style="padding: 10px;font-size: 50px;background-color: aqua;margin:10px;">
+            Less than 3 months
+        </div>
+        <div id="months39" onclick="selectAge(this,39)" style="padding: 10px;font-size: 50px;background-color: aqua;margin:10px;">
+            Between 3 to 9 months
+        </div>
+        <div id="months9" onclick="selectAge(this,9)" style="padding: 10px;font-size: 50px;background-color: aqua;margin:10px;">
+            More than 9 months
+        </div>
+    </div>
+    <div style="text-align:left;"><span onclick="switchView(1)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
+    <div style="text-align:right;"><span onclick="switchView(3)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Next</span></div>
+</div>`;
+        issues = `<div id="switches" style="margin: 5px;padding: 5px;">
+    <p
+        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
+        4. Select issues if any
+    </p>
+    <div style="padding: 20px;margin: 20px;text-align:center;">
+        <p onclick="clickScreen(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Scratches on screen
+        </p>
+        <p onclick="clickCamera(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Camera not working properly
+        </p>
+        <p onclick="clickSpeaker(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Speakers have less volume or other issues
+        </p>
+        <p onclick="clickNetwork(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            connectivity problem because of newtwork
+        </p>
+        <p onclick="clickBattery(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Battery behaviour is absurd
+        </p>
+        <p onclick="clickPowerButton(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Power button not working
+        </p>
+        <p onclick="clickVolumeButton(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Volume buttons not working
+        </p>
+        <p onclick="clickChargingPort(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Problems with charging port
+        </p>
+        <p onclick="clickGlassCracked(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Glass is cracked
+        </p><br>
 
-    <label for="screen">Screen:</label>
-    <input type="text" id="screen" name="screen" value="no"><br>
+    </div>
+    <div style="text-align:left;"><span onclick="switchView(2)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
+    <div style="text-align:right;"><span onclick="switchView(4)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Next</span></div>
+</div>`;
+        condition = `
+        <div id="switches" style="margin: 5px;padding: 5px;">
+    <p
+        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
+        5. Current condition
+    </p>
+    <div style="padding: 20px;margin: 20px;text-align:center;">
+        <p onclick="selectCondition(this,'ex')" id="ex" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Excellent
+        </p>
+        <p onclick="selectCondition(this,'vg')" id="vg" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Very Good
+        </p>
+        <p onclick="selectCondition(this,'g')" id="g" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Good
+        </p>
+        <p onclick="selectCondition(this,'f')" id="f" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 30px;width: 50%;margin-left: 25%;">
+            Fair
+        </p>
+    </div>
+    <div style="text-align:left;"><span onclick="switchView(3)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
+    <div style="text-align:center;"><span onclick="getQuote()" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Get Quote</span></div>
+</div>
+        `;
+        quote = `
+        <div id="switches" style="margin: 5px;padding: 5px;">
+    <p
+        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
+        Congratulations!!! You can avail the total amount of rupees
+    </p>
+    <div style="padding: 20px;margin: 20px;text-align:center;">
+        <div id="amount" style="font-size: 50px;padding: 10px;margin: 10px;background-color: green;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
 
-    <label for="camera">Camera:</label>
-    <input type="text" id="camera" name="camera" value="no"><br>
+        </div>
+    </div>
+    <div style="text-align:left;"><span onclick="switchView(4)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
+</div>
+        `;
+        view3 = `<h1>Sorry but we do not buy off phone</h1>
+        <div style="text-align:left;"><span onclick="switchView(0)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
 
-    <label for="speakers">Speakers:</label>
-    <input type="text" id="speakers" name="speakers" value="no"><br>
+        `;
+        main = document.getElementById("view");
+        main.innerHTML = home;
+        function choiceSwitchOnOrOff(choice) {
+            if (choice == 1) {
+                switches = "no";
+                main.innerHTML = accessories;
+            } else {
+                switches = "yes";
+                main.innerHTML = view3;
+            }
+        }
 
-    <label for="network">Network:</label>
-    <input type="text" id="network" name="network" value="no"><br>
+        function switchView(view) {
+            if (view == 0) {
+                main.innerHTML = home;
+            } else if (view == 1) {
+                main.innerHTML = accessories;
+            } else if (view == 2) {
+                main.innerHTML = age;
+            } else if (view == 3) {
+                main.innerHTML = issues;
+            } else if (view == 4) {
+                main.innerHTML = condition;
+            }
+        }
 
-    <label for="battery">Battery:</label>
-    <input type="text" id="battery" name="battery" value="yes"><br>
 
-    <label for="powerbutton">Power Button:</label>
-    <input type="text" id="powerbutton" name="powerbutton" value="no"><br>
+        function clickBox(el) {
+            if (box == "no") {
+                box = "yes";
+                el.style.border = "10px solid blue";
+                el.style.borderRadius = "10px";
+            } else {
+                box = "no";
+                el.style.border = "2px dashed black";
+            }
+        }
+        function clickCharger(el) {
+            if (charger == "no") {
+                charger = "yes";
+                el.style.border = "10px solid blue";
+                el.style.borderRadius = "10px";
+            } else {
+                charger = "no";
+                el.style.border = "2px dashed black";
+            }
+        }
+        function clickHeadphone(el) {
+            if (headphone == "no") {
+                headphone = "yes";
+                el.style.border = "10px solid blue";
+                el.style.borderRadius = "10px";
+            } else {
+                headphone = "no";
+                el.style.border = "2px dashed black";
+            }
+        }
+        function clickValidbill(el) {
+            if (validbill == "no") {
+                validbill = "yes";
+                el.style.border = "10px solid blue";
+                el.style.borderRadius = "10px";
+            } else {
+                validbill = "no";
+                el.style.border = "2px dashed black";
+            }
+        }
+        function selectAge(el, a) {
+            if (a == 3) {
+                el.style.border = "10px solid blue";
+                months3 = "yes";
+                months39 = "no";
+                months9 = "no";
+                document.getElementById("months39").style.border = "none";
+                document.getElementById("months9").style.border = "none";
+            } else if (a == 39) {
+                el.style.border = "10px solid blue";
+                months3 = "no";
+                months39 = "yes";
+                months9 = "no";
+                document.getElementById("months3").style.border = "none";
+                document.getElementById("months9").style.border = "none";
+            } else if (a == 9) {
+                el.style.border = "10px solid blue";
+                months3 = "no";
+                months39 = "no";
+                months9 = "yes";
+                document.getElementById("months39").style.border = "none";
+                document.getElementById("months3").style.border = "none";
+            }
+        }
 
-    <label for="volumbutton">Volume Button:</label>
-    <input type="text" id="volumbutton" name="volumbutton" value="no"><br>
+        function clickScreen(el) {
+            if (screen == "no") {
+                screen = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                screen = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickCamera(el) {
+            if (camera == "no") {
+                camera = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                camera = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickSpeaker(el) {
+            if (speakers == "no") {
+                speakers = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                speakers = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickNetwork(el) {
+            if (network == "no") {
+                network = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                network = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickBattery(el) {
+            if (battery == "no") {
+                battery = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                battery = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickPowerButton(el) {
+            if (powerbutton == "no") {
+                powerbutton = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                powerbutton = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickVolumeButton(el) {
+            if (volumbutton == "no") {
+                volumbutton = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                volumbutton = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickChargingPort(el) {
+            if (chargingport == "no") {
+                chargingport = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                chargingport = "no";
+                el.style.border = "none";
+            }
+        }
+        function clickGlassCracked(el) {
+            if (glasscrack == "no") {
+                glasscrack = "yes";
+                el.style.border = "10px solid red";
+                el.style.borderRadius = "10px";
+            } else {
+                glasscrack = "no";
+                el.style.border = "none";
+            }
+        }
 
-    <label for="chargingport">Charging Port:</label>
-    <input type="text" id="chargingport" name="chargingport" value="yes"><br>
+        function selectCondition(el, con) {
+            if (con == "ex") {
+                el.style.border = "10px solid green";
+                excellent = "yes";
+                verygood = "no";
+                good = "no";
+                fair = "no";
+                document.getElementById("vg").style.border = "none";
+                document.getElementById("g").style.border = "none";
+                document.getElementById("f").style.border = "none";
+            } else if (con == "vg") {
+                el.style.border = "10px solid green";
+                excellent = "no";
+                verygood = "yes";
+                good = "no";
+                fair = "no";
+                document.getElementById("ex").style.border = "none";
+                document.getElementById("g").style.border = "none";
+                document.getElementById("f").style.border = "none";
+            } else if (con == "g") {
+                el.style.border = "10px solid green";
+                excellent = "no";
+                verygood = "no";
+                good = "yes";
+                fair = "no";
+                document.getElementById("vg").style.border = "none";
+                document.getElementById("ex").style.border = "none";
+                document.getElementById("f").style.border = "none";
+            } else if (con == "f") {
+                el.style.border = "10px solid green";
+                excellent = "no";
+                verygood = "no";
+                good = "no";
+                fair = "yes";
+                document.getElementById("vg").style.border = "none";
+                document.getElementById("g").style.border = "none";
+                document.getElementById("ex").style.border = "none";
+            }
+        }
 
-    <label for="glasscrack">Glass Crack:</label>
-    <input type="text" id="glasscrack" name="glasscrack" value="yes"><br>
+        function getQuote() {
+            // console.log("Switches: " + switches);
+            // console.log("Box: " + box);
+            // console.log("Charger: " + charger);
+            // console.log("Headphone: " + headphone);
+            // console.log("Valid Bill: " + validbill);
+            // console.log("months3: " + months3);
+            // console.log("months39: " + months39);
+            // console.log("months9: " + months9);
+            // console.log("Screen: " + screen);
+            // console.log("Camera: " + camera);
+            // console.log("Speakers: " + speakers);
+            // console.log("Network: " + network);
+            // console.log("Battery: " + battery);
+            // console.log("Power Button: " + powerbutton);
+            // console.log("Volume Button: " + volumbutton);
+            // console.log("Charging Port: " + chargingport);
+            // console.log("Glass Crack: " + glasscrack);
+            // console.log("Excellent: " + excellent);
+            // console.log("Very Good: " + verygood);
+            // console.log("Good: " + good);
+            // console.log("Fair: " + fair);
+            const formData = {
+                phoneid: "1",
+                switchoff: switches,
+                box: box,
+                charger: charger,
+                headphone: headphone,
+                validbill: validbill,
+                months3: months3,
+                months39: months39,
+                months9: months9,
+                screen: screen,
+                camera: camera,
+                speakers: speakers,
+                network: network,
+                battery: battery,
+                powerbutton: powerbutton,
+                volumbutton: volumbutton,
+                chargingport: chargingport,
+                glasscrack: glasscrack,
+                excellent: excellent,
+                verygood: verygood,
+                good: good,
+                fair: fair,
+            };
+            console.log(JSON.stringify(formData));
 
-    <label for="excellent">Excellent:</label>
-    <input type="text" id="excellent" name="excellent" value="yes"><br>
+            const url = 'https://8988-124-66-172-172.ngrok-free.app/selltechie.in/quotes';
+            // const url = 'http://localhost:8080/selltechie.in/quotes';
 
-    <label for="verygood">Very Good:</label>
-    <input type="text" id="verygood" name="verygood" value="yes"><br>
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    main.innerHTML=quote;
+                    document.getElementById('amount').innerHTML = JSON.stringify(data, null, 2);
+                    console.log(JSON.stringify(data, null, 2));
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
 
-    <label for="good">Good:</label>
-    <input type="text" id="good" name="good" value="no"><br>
-
-    <label for="fair">Fair:</label>
-    <input type="text" id="fair" name="fair" value="no"><br>
-
-    <button type="button" onclick="submitForm()">Get Quote</button>
-  </form>
-
-  <div id="response"></div>
-
-  <script>
-    function submitForm() {
-      const formData = {
-        phoneid: document.getElementById('phoneid').value,
-        switchoff: document.getElementById('switchoff').value,
-        box: document.getElementById('box').value,
-        charger: document.getElementById('charger').value,
-        headphone: document.getElementById('headphone').value,
-        validbill: document.getElementById('validbill').value,
-        months3: document.getElementById('months3').value,
-        months39: document.getElementById('months39').value,
-        months9: document.getElementById('months9').value,
-        screen: document.getElementById('screen').value,
-        camera: document.getElementById('camera').value,
-        speakers: document.getElementById('speakers').value,
-        network: document.getElementById('network').value,
-        battery: document.getElementById('battery').value,
-        powerbutton: document.getElementById('powerbutton').value,
-        volumbutton: document.getElementById('volumbutton').value,
-        chargingport: document.getElementById('chargingport').value,
-        glasscrack: document.getElementById('glasscrack').value,
-        excellent: document.getElementById('excellent').value,
-        verygood: document.getElementById('verygood').value,
-        good: document.getElementById('good').value,
-        fair: document.getElementById('fair').value,
-      };
-      const url = 'https://b888-124-66-172-172.ngrok-free.app/selltechie.in/quotes';
-
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          document.getElementById('response').innerHTML = JSON.stringify(data, null, 2);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  </script>
+    </script>
 </body>
+
 </html>
