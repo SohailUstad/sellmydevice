@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,6 +99,13 @@
             background-color: #45a049;
             /* Darker green on hover */
         }
+
+        #imageSec{
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
@@ -134,143 +142,161 @@
                     <h3 style="padding: 5px;border-bottom: 2px solid gray;width: 40%;">Model Info</h3>
 
                     <label for="modelName">Model Name</label>
-                    <input type="text" name="model"><br><br>
+                    <input type="text" id="model"><br><br>
                     <label for="brandName">Brand Name</label>
-                    <input type="text" name="brand"><br><br>
+                    <input type="text" id="brand"><br><br>
                     <label for="basePrice">Base Price</label>
-                    <input type="number" name="base">
+                    <input type="number" id="base">
 
                 </section>
 
                 <section id="priceSec">
                     <h3 style="padding: 5px;border-bottom: 2px solid gray;width: 40%;">Price Info</h3>
-                    <input type="number" name="switchoff" placeholder="switchoff">
-                    <select name="switchoffunit">
+                    <input type="number" id="switchoff" placeholder="switchoff">
+                    <select id="switchoffunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
                     <hr>
                     <h4>Accessories</h4>
-                    <input type="number" name="box" placeholder="box">
-                    <select name="boxunit">
+                    <input type="number" id="box" placeholder="box">
+                    <select id="boxunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="charger" placeholder="charger">
-                    <select name="chargerunit">
+                    <input type="number" id="charger" placeholder="charger">
+                    <select id="chargerunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="headphone" placeholder="headphone">
-                    <select name="headphoneunit">
+                    <input type="number" id="headphone" placeholder="headphone">
+                    <select id="headphoneunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="validbill" placeholder="validbill">
-                    <select name="validbillunit">
+                    <input type="number" id="validbill" placeholder="validbill">
+                    <select id="validbillunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
                     <hr>
                     <h4>Age</h4>
-                    <input type="number" name="months3" placeholder="3 months">
-                    <select name="months3unit">
+                    <input type="number" id="months3" placeholder="3 months">
+                    <select id="months3unit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="months39" placeholder="3 - 9 months">
-                    <select name="months39unit">
+                    <input type="number" id="months39" placeholder="3 - 9 months">
+                    <select id="months39unit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="months9" placeholder="9 months or more">
-                    <select name="months9unit">
+                    <input type="number" id="months9" placeholder="9 months or more">
+                    <select id="months9unit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
                     <hr>
                     <h4>Issues</h4>
-                    <input type="number" name="screen" placeholder="screen issues">
-                    <select name="screenunit">
+                    <input type="number" id="screen" placeholder="screen issues">
+                    <select id="screenunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
 
-                    <input type="number" name="camera" placeholder="camera issues">
-                    <select name="cameraunit">
+                    <input type="number" id="camera" placeholder="camera issues">
+                    <select id="cameraunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="speakers" placeholder="Speaker issues">
-                    <select name="speakersunit">
+                    <input type="number" id="speakers" placeholder="Speaker issues">
+                    <select id="speakersunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="network" placeholder="network issues">
-                    <select name="networkunit">
+                    <input type="number" id="network" placeholder="network issues">
+                    <select id="networkunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="battery" placeholder="battery issues">
-                    <select name="batteryunit">
+                    <input type="number" id="battery" placeholder="battery issues">
+                    <select id="batteryunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="powerbutton" placeholder="powerbutton issues">
-                    <select name="powerbuttonunit">
+                    <input type="number" id="powerbutton" placeholder="powerbutton issues">
+                    <select id="powerbuttonunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="volumbutton" placeholder="volumbutton issues">
-                    <select name="volumbuttonunit">
+                    <input type="number" id="volumbutton" placeholder="volumbutton issues">
+                    <select id="volumbuttonunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="chargingport" placeholder="chargingport issues">
-                    <select name="chargingportunit">
+                    <input type="number" id="chargingport" placeholder="chargingport issues">
+                    <select id="chargingportunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="glasscrack" placeholder="Glass issues">
-                    <select name="glasscrackunit">
+                    <input type="number" id="glasscrack" placeholder="Glass issues">
+                    <select id="glasscrackunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
                     <hr>
                     <h4>Condition</h4>
-                    <input type="number" name="excellent" placeholder="excellent condition">
-                    <select name="excellentunit">
+                    <input type="number" id="excellent" placeholder="excellent condition">
+                    <select id="excellentunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="verygood" placeholder="very good condition">
-                    <select name="verygoodunit">
+                    <input type="number" id="verygood" placeholder="very good condition">
+                    <select id="verygoodunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="good" placeholder="good condition">
-                    <select name="goodunit">
+                    <input type="number" id="good" placeholder="good condition">
+                    <select id="goodunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
-                    <input type="number" name="fair" placeholder="fair condition">
-                    <select name="fairunit">
+                    <input type="number" id="fair" placeholder="fair condition">
+                    <select id="fairunit">
                         <option value="%">Percent</option>
                         <option value="R">Rupees</option>
                     </select>
                 </section>
-                <section>
-                    Select Image File: <input type="file" name="imageFile" id="imageFileInput">
+                <section id="imageSec">
+                    Select Image File: <input type="file" id="photo" accept="image/*">
                 </section>
+                <div id="smessage" style="width: 100%;border-radius: 10px;border: 1px solid black;text-align: center;padding: 10px 0px;font-weight: bolder;background-color: yellowgreen;">
+                    Operation Successfull <button type="button" id="sclose" style="font-size: 20px;color: black;">X</button>
+                </div>
+                <div id="fmessage" style="width: 100%;border-radius: 10px;border: 1px solid black;text-align: center;padding: 10px 0px;font-weight: bolder;background-color: red;color: white;">
+                    Operation Failed <button type="button" id="fclose" style="font-size: 20px;color: black;">X</button>
+                </div>
                 <div style="text-align: center;margin: 10px;">
                     <button type="submit">Save Model Info</button>
                 </div>
             </form>
         </div>
+        
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+        $("#smessage").hide();
+        $("#fmessage").hide();
+        $("#sclose").click(function(){
+            $("#smessage").hide();
+        });
+        $("#fclose").click(function(){
+            $("#fmessage").hide();
+        });
+
+        
+
         $("#menu").hide();
         function toggleMenu(x) {
             x.classList.toggle("change");
@@ -280,49 +306,83 @@
             $('#deviceForm').submit(function (event) {
                 event.preventDefault();
 
-                // Create FormData object
-                const formData = new FormData(this);
+                var phoneData = {
+                    model: $("#model").val(),
+                    brand: $("#brand").val(),
+                    base: $("#base").val()
+                }
 
-                // Append imageFile from the input field to the FormData
-                formData.append('imageFile', $('#imageFileInput')[0].files[0]);
+                var priceData = {
+                    switchoff: $("#switchoff").val(),
+                    switchoffunit: $("#switchoffunit").val(),
+                    box: $("#box").val(),
+                    boxunit: $("#boxunit").val(),
+                    charger: $("#charger").val(),
+                    chargerunit: $("#chargerunit").val(),
+                    headphone: $("#headphone").val(),
+                    headphoneunit: $("#headphoneunit").val(),
+                    validbill: $("#validbill").val(),
+                    validbillunit: $("#validbillunit").val(),
+                    months3: $("#months3").val(),
+                    months3unit: $("#months3unit").val(),
+                    months39: $("#months39").val(),
+                    months39unit: $("#months39unit").val(),
+                    months9: $("#months9").val(),
+                    months9unit: $("#months9unit").val(),
+                    screen: $("#screen").val(),
+                    screenunit: $("#screenunit").val(),
+                    camera: $("#camera").val(),
+                    cameraunit: $("#cameraunit").val(),
+                    speakers: $("#speakers").val(),
+                    speakersunit: $("#speakersunit").val(),
+                    network: $("#network").val(),
+                    networkunit: $("#networkunit").val(),
+                    battery: $("#battery").val(),
+                    batteryunit: $("#batteryunit").val(),
+                    powerbutton: $("#powerbutton").val(),
+                    powerbuttonunit: $("#powerbuttonunit").val(),
+                    volumbutton: $("#volumbutton").val(),
+                    volumbuttonunit: $("#volumbuttonunit").val(),
+                    chargingport: $("#chargingport").val(),
+                    chargingportunit: $("#chargingportunit").val(),
+                    glasscrack: $("#glasscrack").val(),
+                    glasscrackunit: $("#glasscrackunit").val(),
+                    excellent: $("#excellent").val(),
+                    excellentunit: $("#excellentunit").val(),
+                    verygood: $("#verygood").val(),
+                    verygoodunit: $("#verygoodunit").val(),
+                    good: $("#good").val(),
+                    goodunit: $("#goodunit").val(),
+                    fair: $("#fair").val(),
+                    fairunit: $("#fairunit").val(),
+                }
 
-                // Create the model DTO object
-                const modelDTO = {
-                    phone: {
-                        model: formData.get('model'),
-                        brand: formData.get('brand'),
-                        image: formData.get('image'),
-                        base: formData.get('base'),
-                        // Directly include the image file in the phone object
-                        imageFile: formData.get('imageFile'),
-                        // Add other properties as needed
-                    },
-                    price: {
-                        // Add price properties
-                        switchoff: formData.get('switchoff'),
-                        switchoffunit: formData.get('switchoffunit'),
-                        // Add other properties as needed
-                    }
-                };
-
-                // Convert the model DTO object to JSON
-                const jsonData = JSON.stringify(modelDTO);
-
-                // Append the JSON data as a blob
-                formData.append('modelDTO', new Blob([jsonData], { type: 'application/json' }));
-
-                const url = 'https://895f-124-66-172-172.ngrok-free.app/selltechie.in/phones';
-                fetch(url, {
-                    method: 'POST',
-                    body: formData,
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(JSON.stringify(data, null, 2));
-                    })
-                    .catch((error) => {
-                        console.error(error);
+                var imageFile = $("#photo")[0].files[0];
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var imageBase64 = reader.result.split(",")[1];
+                    var requestData = {
+                        phone: phoneData,
+                        price: priceData,
+                        image: imageBase64
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8080/selltechie.in/phones",
+                        data: JSON.stringify(requestData),
+                        contentType: "application/json",
+                        success: function (response) {
+                            console.log(response);
+                            $("#smessage").show();
+                        },
+                        error: function (error) {
+                            console.error(error);
+                            $("#fmessage").show();
+                        }
                     });
+
+                }
+                reader.readAsDataURL(imageFile);
             });
         });
 
