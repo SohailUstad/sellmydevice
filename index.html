@@ -4,21 +4,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <title>Phones || SellTechie.in</title>
+    <style>
+        .menu-line {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 6px 0;
+            transition: 1.0s;
+        }
+
+        nav {
+            background-color: rgb(38, 41, 38);
+            margin: 0;
+            color: white;
+            padding: 5px;
+            font-family: sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 10px 0px;
+        }
+
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+
+        .cardContainer {
+            text-align: center;
+            border: 1px solid aqua;
+            border-radius: 10px;
+            padding: 5%;
+            margin: 5%;
+        }
+
+        img {
+            width: 80%;
+        }
+
+        .model-name {
+            font-size: 20px;
+            font-family: sans-serif;
+        }
+
+        #modelNameContainer {
+            padding: 5%;
+            margin: 5%;
+            font-size: 20px;
+            font-family: sans-serif;
+            text-align: center;
+            font-weight: bolder;
+        }
+
+        #switches {
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .switch-header {
+            background-color: #2c3e50;
+            /* Midnight Blue */
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        #switch-options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .switch-option {
+            cursor: pointer;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            width: 80%;
+            color: #fff;
+            /* White */
+            transition: background-color 0.3s ease;
+        }
+
+        #yes {
+            background-color: #27ae60;
+            /* Nephritis Green */
+        }
+
+        #no {
+            background-color: #e74c3c;
+            /* Alizarin Red */
+        }
+
+        .switch-option:hover {
+            opacity: 0.9;
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .navigation-buttons button {
+            padding: 10px;
+            background-color: navy;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #pickUpForm {
+            padding: 10px;
+            margin: 2px;
+            text-align: left;
+        }
+
+        #pickUpForm form #phoneSec input {
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <h1
-            style="color: navy;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-            Apple iPhone 5c 8 GB (Factory Unlocked)
-        </h1>
+    <div id="main-body">
+        <div id="header" style="text-align: center;">
+            <h1 style="font-family:Zen Dots;">SellTechie</h1>
+        </div>
+
+        <div id="navigation">
+            <nav>
+                <div id="menu-icon" onclick="toggleMenu(this)">
+                    <div class="menu-line bar1"></div>
+                    <div class="menu-line bar2"></div>
+                    <div class="menu-line bar3"></div>
+                </div>
+                <ul id="menu">
+                    <li><span>Phones</span></li>
+                    <hr>
+                    <li><span>Laptops</span></li>
+                    <hr>
+                    <li><span>Tablats</span></li>
+                    <hr>
+                    <li><span>Smart Watches</span></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="phoneList">
+
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $("#menu").hide();
+        function toggleMenu(x) {
+            x.classList.toggle("change");
+            $("#menu").toggle(1000);
+        }
+
+        var pId = null;
+        function Quote(modelName, phoneId) {
+            $("#phoneList").html(
+                `
+    <div id="modelNameContainer">
+        <span>${modelName}</span>
         <div id="view">
 
         </div>
     </div>
+        
+        `
+            );
+            pId = phoneId;
+            main = document.getElementById("view");
+            main.innerHTML = home;
+        }
 
-    <script>
+        $(document).ready(function () {
+
+            const url = 'http://localhost:8080/selltechie.in/phones';
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // Handle the data and dynamically create Bootstrap cards
+                    const phoneListContainer = $('#phoneList');
+
+                    data.forEach(phone => {
+                        const cardHtml = `
+        <div class="cardContainer" onclick="Quote('${phone.model}','${phone.id}')">
+            <div class="imageContainer">
+                <img src="http://localhost:8080/selltechie.in${phone.image}" alt="Card image cap">
+            </div> 
+            <div class="textContainer">
+                <span class="model-name">${phone.model}</span>
+            </div>   
+        </div>
+    `;
+                        phoneListContainer.append(cardHtml);
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        });
         var switches = "no";
 
         var box = "no";
@@ -44,148 +269,167 @@
         var verygood = "no";
         var good = "no";
         var fair = "no";
-        home = `<div id="switches" style="margin: 5px;padding: 5px;">
-    
-    <p
-        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
-        1. Switches On
-    </p>
-    <div style="padding: 20px;margin: 20px;text-align:center;">
-        <span onclick="choiceSwitchOnOrOff(1)" style="cursor: pointer;padding: 10px;margin: 10px;font-size: 30px;background-color: yellow;border-radius: 10px;border: 1px solid black;">YES</span>
-        <span onclick="choiceSwitchOnOrOff(0)" style="cursor: pointer;padding: 10px;margin: 10px;font-size: 30px;background-color: red;color: white;border-radius: 10px;border: 2px solid black;">NO</span>
+        home = `
+        <style>
+            
+    </style>
+    <div id="switches">
+        <div class="switch-header">1. Switches On</div>
+        <div id="switch-options">
+            <button id="yes" class="switch-option" onclick="choiceSwitchOnOrOff(1)" >YES</button>
+            <button id="no" class="switch-option" onclick="choiceSwitchOnOrOff(0)">NO</button>
+        </div>
     </div>
-</div>`;
+    `;
 
         accessories = `
-        <div id="switches" style="margin: 5px;padding: 5px;">
-    <p
-        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
-        2. Accessories You Have
-    </p>
-    <div style="padding: 20px;margin: 20px;text-align:center;">
-        <div onclick="clickBox(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
-            <img style="height: 200px;width: 100%;" src="https://cdn.vectorstock.com/i/1000x1000/68/15/mobile-box-logo-icon-design-vector-22546815.webp"
+        <div id="switches">
+            <div class="switch-header">2. Accessories You Have</div>
+            <div style="padding: 20px;margin: 20px;text-align:center;">
+                <div onclick="clickBox(this)" id="yes" >
+                    <img style="height: 200px;width: 100%;" src="https://cdn.vectorstock.com/i/1000x1000/68/15/mobile-box-logo-icon-design-vector-22546815.webp"
                 alt="hello">
-        </div>
-        <div onclick="clickCharger(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
-            <img style="height: 200px;width: 100%;" src="https://m.media-amazon.com/images/I/61FY05f+D6L._SL1500_.jpg"
+                </div>
+                <div onclick="clickCharger(this)" id="yes" >
+                <img style="height: 200px;width: 100%;" src="https://m.media-amazon.com/images/I/61FY05f+D6L._SL1500_.jpg"
                 alt="hello">
-        </div>
-        <div onclick="clickHeadphone(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
-            <img style="height: 200px;width: 100%;" src="https://m.media-amazon.com/images/I/61s3IkXIZjL._SL1417_.jpg"
+                </div>
+                <div onclick="clickHeadphone(this)" id="yes" >
+                <img style="height: 200px;width: 100%;" src="https://m.media-amazon.com/images/I/61s3IkXIZjL._SL1417_.jpg"
                 alt="hello">
-        </div>
-        <div onclick="clickValidbill(this)" id="box" style="margin:5px;height: 200px;width: 100%;border: 2px dashed black;text-align: center;">
-            <img style="height: 200px;width: 100%;" src="https://cdn.printshoppy.com/image/cache/catalog/product-image/stationery/bill-book/bill-book-102-600x800.webp"
+                </div>
+                <div onclick="clickValidbill(this)" id="yes" >
+                <img style="height: 200px;width: 100%;" src="https://cdn.printshoppy.com/image/cache/catalog/product-image/stationery/bill-book/bill-book-102-600x800.webp"
                 alt="hello">
+                </div>
+                <div class="navigation-buttons">
+                    <button onclick="switchView(0)">Back</button>
+                    <button onclick="switchView(2)">Next</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div style="text-align:left;"><span onclick="switchView(0)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
-    <div style="text-align:right;"><span onclick="switchView(2)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Next</span></div>
-</div>
 `;
 
-        age = `<div id="switches" style="margin: 5px;padding: 5px;">
-    <p
-        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
-        3. How old your phone is?
-    </p>
-    <div style="padding: 20px;margin: 20px;text-align:center;">
-        <div id="months3" onclick="selectAge(this,3)" style="padding: 10px;font-size: 30px;background-color: aqua;margin:10px;">
-            Less than 3 months
-        </div>
-        <div id="months39" onclick="selectAge(this,39)" style="padding: 10px;font-size: 30px;background-color: aqua;margin:10px;">
-            Between 3 to 9 months
-        </div>
-        <div id="months9" onclick="selectAge(this,9)" style="padding: 10px;font-size: 30px;background-color: aqua;margin:10px;">
-            More than 9 months
-        </div>
-    </div>
-    <div style="text-align:left;"><span onclick="switchView(1)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
-    <div style="text-align:right;"><span onclick="switchView(3)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Next</span></div>
-</div>`;
-        issues = `<div id="switches" style="margin: 5px;padding: 5px;">
-    <p
-        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
-        4. Select issues if any
-    </p>
-    <div style="padding: 20px;margin: 20px;text-align:center;">
-        <p onclick="clickScreen(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Scratches on screen
-        </p>
-        <p onclick="clickCamera(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Camera not working properly
-        </p>
-        <p onclick="clickSpeaker(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Speakers have less volume or other issues
-        </p>
-        <p onclick="clickNetwork(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            connectivity problem because of newtwork
-        </p>
-        <p onclick="clickBattery(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Battery behaviour is absurd
-        </p>
-        <p onclick="clickPowerButton(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Power button not working
-        </p>
-        <p onclick="clickVolumeButton(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Volume buttons not working
-        </p>
-        <p onclick="clickChargingPort(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Problems with charging port
-        </p>
-        <p onclick="clickGlassCracked(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Glass is cracked
-        </p><br>
-
-    </div>
-    <div style="text-align:left;"><span onclick="switchView(2)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
-    <div style="text-align:right;"><span onclick="switchView(4)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Next</span></div>
-</div>`;
+        age = `
+        <div id="switches">
+            <div class="switch-header">3. How old your phone is?</div>
+            <div style="padding: 20px;margin: 20px;text-align:center;">
+                <div id="months3" onclick="selectAge(this,3)" style="padding: 10px;font-size: 30px;background-color: aqua;margin:10px;">
+                Less than 3 months
+                </div>
+                <div id="months39" onclick="selectAge(this,39)" style="padding: 10px;font-size: 30px;background-color: aqua;margin:10px;">
+                Between 3 to 9 months
+                </div>
+                <div id="months9" onclick="selectAge(this,9)" style="padding: 10px;font-size: 30px;background-color: aqua;margin:10px;">
+                More than 9 months
+                </div>
+                <div class="navigation-buttons">
+                    <button onclick="switchView(1)">Back</button>
+                    <button onclick="switchView(3)">Next</button>
+                </div>
+            </div>
+        </div>`;
+        issues = `
+        <div id="switches">
+            <div class="switch-header">4. Select issues if any</div>
+            <div>
+                <p onclick="clickScreen(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Scratches on screen
+                </p>
+                <p onclick="clickCamera(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Camera not working properly
+                </p>
+                <p onclick="clickSpeaker(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Speakers have less volume or other issues
+                </p>
+                <p onclick="clickNetwork(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    connectivity problem because of newtwork
+                </p>
+                <p onclick="clickBattery(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Battery behaviour is absurd
+                </p>
+                <p onclick="clickPowerButton(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Power button not working
+                </p>
+                <p onclick="clickVolumeButton(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Volume buttons not working
+                </p>
+                <p onclick="clickChargingPort(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Problems with charging port
+                </p>
+                <p onclick="clickGlassCracked(this)" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Glass is cracked
+                </p>
+            </div>
+            <div class="navigation-buttons" style="width:60%;text-align:center;margin-left:20%;">
+                    <button onclick="switchView(2)">Back</button>
+                    <button onclick="switchView(4)">Next</button>
+            </div><br>
+        </div>`;
         condition = `
-        <div id="switches" style="margin: 5px;padding: 5px;">
-    <p
-        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
-        5. Current condition
-    </p>
-    <div style="padding: 20px;margin: 20px;text-align:center;">
-        <p onclick="selectCondition(this,'ex')" id="ex" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Excellent
-        </p>
-        <p onclick="selectCondition(this,'vg')" id="vg" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Very Good
-        </p>
-        <p onclick="selectCondition(this,'g')" id="g" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Good
-        </p>
-        <p onclick="selectCondition(this,'f')" id="f" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;margin-left: 25%;">
-            Fair
-        </p>
-    </div>
-    <div style="text-align:left;"><span onclick="switchView(3)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
-    <div style="text-align:center;"><span onclick="getQuote()" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Get Quote</span></div>
-</div>
+        <div id="switches">
+            <div class="switch-header">5. Current condition</div>
+            <div style="padding: 20px;margin: 20px;text-align:center;">
+                <p onclick="selectCondition(this,'ex')" id="ex" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Excellent
+                </p>
+                <p onclick="selectCondition(this,'vg')" id="vg" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Very Good
+                </p>
+                <p onclick="selectCondition(this,'g')" id="g" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Good
+                </p>
+                <p onclick="selectCondition(this,'f')" id="f" style="margin: 10px;padding: 10px;background-color: aqua;font-size: 20px;">
+                    Fair
+                </p>
+            </div>
+            <div class="navigation-buttons"  style="width:60%;text-align:center;margin-left:20%;">
+                <button onclick="switchView(3)">Back</button>
+                <button onclick="getQuote()">Get Quote</button>
+            </div><br>
+        </div>
         `;
         quote = `
         <div id="switches" style="margin: 5px;padding: 5px;">
-    <p
-        style="background-color: navy;color: white;width: 100%;padding: 5px;font-size: 30px;margin: 5px;text-align: center;border-radius: 15px;">
-        Congratulations!!! You can avail the total amount of rupees
-    </p>
-    <div style="padding: 20px;margin: 20px;text-align:center;">
-        <div id="amount" style="font-size: 50px;padding: 10px;margin: 10px;background-color: green;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+            <div class="switch-header" >Congratulations!!! You can avail the total amount of rupees</div>
+            <div style="padding: 20px;margin: 20px;text-align:center;">
+                <div id="amount" style="font-size: 50px;padding: 10px;margin: 10px;background-color: green;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
 
+                </div>
+            </div>
+            <div class="navigation-buttons"  style="width:60%;text-align:center;margin-left:20%;">
+                <button onclick="switchView(4)">Back</button>
+            </div>
+            <div class="placePickUp">
+                <button onclick="switchView(5)">Place PickUp Now</button>
+            </div>
+            <br>
         </div>
-    </div>
-    <div style="text-align:left;"><span onclick="switchView(4)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
-</div>
+        `;
+        pickUpForm = `
+            <div id="pickUpForm">
+                <form id="deviceForm">
+                    
+                    <section id="phoneSec" style="padding: 5px;">
+                        <h3 style="padding: 5px;border-bottom: 2px solid gray;width: 90%;">Enter Details</h3>
+
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="model"><br><br>
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" id="brand"><br><br>
+                        <label for="basePrice">Base Price</label>
+                        <input type="number" id="base">
+
+                    </section>
+                </form>
+
+            </div>
         `;
         view3 = `<h1>Sorry but we do not buy off phone</h1>
         <div style="text-align:left;"><span onclick="switchView(0)" style="padding:10px;background-color:blue;color:white;border-radius:10px;">Back</span></div>
 
         `;
-        main = document.getElementById("view");
-        main.innerHTML = home;
+
         function choiceSwitchOnOrOff(choice) {
             if (choice == 1) {
                 switches = "no";
@@ -207,6 +451,8 @@
                 main.innerHTML = issues;
             } else if (view == 4) {
                 main.innerHTML = condition;
+            } else if (view == 5) {
+                main.innerHTML = pickUpForm;
             }
         }
 
@@ -214,60 +460,60 @@
         function clickBox(el) {
             if (box == "no") {
                 box = "yes";
-                el.style.border = "10px solid blue";
+                el.style.border = "5px solid #27ae60";
                 el.style.borderRadius = "10px";
             } else {
                 box = "no";
-                el.style.border = "2px dashed black";
+                el.style.border = "none";
             }
         }
         function clickCharger(el) {
             if (charger == "no") {
                 charger = "yes";
-                el.style.border = "10px solid blue";
+                el.style.border = "5px solid #27ae60";
                 el.style.borderRadius = "10px";
             } else {
                 charger = "no";
-                el.style.border = "2px dashed black";
+                el.style.border = "none";
             }
         }
         function clickHeadphone(el) {
             if (headphone == "no") {
                 headphone = "yes";
-                el.style.border = "10px solid blue";
+                el.style.border = "5px solid #27ae60";
                 el.style.borderRadius = "10px";
             } else {
                 headphone = "no";
-                el.style.border = "2px dashed black";
+                el.style.border = "none";
             }
         }
         function clickValidbill(el) {
             if (validbill == "no") {
                 validbill = "yes";
-                el.style.border = "10px solid blue";
+                el.style.border = "5px solid #27ae60";
                 el.style.borderRadius = "10px";
             } else {
                 validbill = "no";
-                el.style.border = "2px dashed black";
+                el.style.border = "none";
             }
         }
         function selectAge(el, a) {
             if (a == 3) {
-                el.style.border = "10px solid blue";
+                el.style.border = "5px solid #27ae60";
                 months3 = "yes";
                 months39 = "no";
                 months9 = "no";
                 document.getElementById("months39").style.border = "none";
                 document.getElementById("months9").style.border = "none";
             } else if (a == 39) {
-                el.style.border = "10px solid blue";
+                el.style.border = "5px solid #27ae60";
                 months3 = "no";
                 months39 = "yes";
                 months9 = "no";
                 document.getElementById("months3").style.border = "none";
                 document.getElementById("months9").style.border = "none";
             } else if (a == 9) {
-                el.style.border = "10px solid blue";
+                el.style.border = "5px solid #27ae60";
                 months3 = "no";
                 months39 = "no";
                 months9 = "yes";
@@ -279,7 +525,7 @@
         function clickScreen(el) {
             if (screen == "no") {
                 screen = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 screen = "no";
@@ -289,7 +535,7 @@
         function clickCamera(el) {
             if (camera == "no") {
                 camera = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 camera = "no";
@@ -299,7 +545,7 @@
         function clickSpeaker(el) {
             if (speakers == "no") {
                 speakers = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 speakers = "no";
@@ -309,7 +555,7 @@
         function clickNetwork(el) {
             if (network == "no") {
                 network = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 network = "no";
@@ -319,7 +565,7 @@
         function clickBattery(el) {
             if (battery == "no") {
                 battery = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 battery = "no";
@@ -329,7 +575,7 @@
         function clickPowerButton(el) {
             if (powerbutton == "no") {
                 powerbutton = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 powerbutton = "no";
@@ -339,7 +585,7 @@
         function clickVolumeButton(el) {
             if (volumbutton == "no") {
                 volumbutton = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 volumbutton = "no";
@@ -349,7 +595,7 @@
         function clickChargingPort(el) {
             if (chargingport == "no") {
                 chargingport = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 chargingport = "no";
@@ -359,7 +605,7 @@
         function clickGlassCracked(el) {
             if (glasscrack == "no") {
                 glasscrack = "yes";
-                el.style.border = "10px solid red";
+                el.style.border = "5px solid red";
                 el.style.borderRadius = "10px";
             } else {
                 glasscrack = "no";
@@ -369,7 +615,7 @@
 
         function selectCondition(el, con) {
             if (con == "ex") {
-                el.style.border = "10px solid green";
+                el.style.border = "5px solid green";
                 excellent = "yes";
                 verygood = "no";
                 good = "no";
@@ -378,7 +624,7 @@
                 document.getElementById("g").style.border = "none";
                 document.getElementById("f").style.border = "none";
             } else if (con == "vg") {
-                el.style.border = "10px solid green";
+                el.style.border = "5px solid green";
                 excellent = "no";
                 verygood = "yes";
                 good = "no";
@@ -387,7 +633,7 @@
                 document.getElementById("g").style.border = "none";
                 document.getElementById("f").style.border = "none";
             } else if (con == "g") {
-                el.style.border = "10px solid green";
+                el.style.border = "5px solid green";
                 excellent = "no";
                 verygood = "no";
                 good = "yes";
@@ -396,7 +642,7 @@
                 document.getElementById("ex").style.border = "none";
                 document.getElementById("f").style.border = "none";
             } else if (con == "f") {
-                el.style.border = "10px solid green";
+                el.style.border = "5px solid green";
                 excellent = "no";
                 verygood = "no";
                 good = "no";
@@ -430,7 +676,7 @@
             // console.log("Good: " + good);
             // console.log("Fair: " + fair);
             const formData = {
-                phoneid: "1",
+                phoneid: pId,
                 switchoff: switches,
                 box: box,
                 charger: charger,
@@ -455,8 +701,8 @@
             };
             console.log(JSON.stringify(formData));
 
-            const url = 'https://8988-124-66-172-172.ngrok-free.app/selltechie.in/quotes';
-            // const url = 'http://localhost:8080/selltechie.in/quotes';
+            // const url = 'https://7220-124-66-172-172.ngrok-free.app/selltechie.in/quotes';
+            const url = 'http://localhost:8080/selltechie.in/quotes';
 
             fetch(url, {
                 method: 'POST',
@@ -467,7 +713,7 @@
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    main.innerHTML=quote;
+                    main.innerHTML = quote;
                     document.getElementById('amount').innerHTML = JSON.stringify(data, null, 2);
                     console.log(JSON.stringify(data, null, 2));
                 })
